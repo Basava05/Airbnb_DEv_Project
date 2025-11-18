@@ -1,13 +1,13 @@
 🏡 WanderLust – Airbnb Clone (Major Project)
 
 WanderLust is a full-stack Airbnb-style web application built using Node.js, Express, MongoDB, Mongoose, Passport.js, and EJS.
-It allows users to create listings, browse listings, add reviews, authenticate securely, and manage their accounts.
+It allows users to browse listings, create/manage listings, post reviews, authenticate securely, and manage their accounts.
 
 ✨ Features
-1. User Authentication
+🧑‍💻 1. User Authentication
 
 Detail:
-Secure login, logout, and registration system. Certain pages are protected and accessible only to authenticated users.
+Secure login, registration, and logout. Protected routes ensure only logged-in users can create/edit/delete listings or write reviews.
 
 Implementation:
 
@@ -29,44 +29,44 @@ req.login()
 
 req.logout()
 
-2. Listings (CRUD Functionality)
+🏠 2. Listings (CRUD)
 
 Detail:
 Users can create, view, edit, and delete listings.
 
 Implementation:
 
-Routes located in routes/listing.js
+Routes → /routes/listing.js
 
-EJS views (new, edit, show, index)
+Views → /views/listings/ (new, edit, index, show)
 
-Joi validation for safe data submission
+Joi validation for safety
 
-Express middleware to verify ownership before editing or deleting
+Middleware to verify listing owner before edit/delete
 
 Database:
 
-MongoDB with Mongoose model Listing
+Mongoose model: Listing
 
-3. Reviews System
+⭐ 3. Reviews System
 
 Detail:
-Users can write reviews for listings and delete their own reviews.
+Users can add and delete reviews for listings.
 
 Implementation:
 
-Nested routes under /listings/:id/reviews
+Nested routes: /listings/:id/reviews
 
-Review model with references to Listing & User
+Review model references Listing and User
 
-Review validation using Joi
+Joi validation for review content
 
-Show reviews on listing page using Mongoose populate()
+Populate reviews on listing details page
 
-4. Flash Messages
+🔔 4. Flash Messages
 
 Detail:
-UI notifications for success/error during login, editing, creating, or deleting resources.
+Success/error messages for login, CRUD operations, and validation errors.
 
 Uses:
 
@@ -74,100 +74,91 @@ connect-flash
 
 express-session
 
-5. Error Handling
+⚠️ 5. Error Handling
 
 Detail:
-Centralized error management with a custom error class.
+Centralized error handler using a custom class.
 
 Includes:
 
 ExpressError class
 
-Global error middleware rendering error.ejs
+Error middleware rendering error.ejs
 
-6. Input Validation
+🛡️ 6. Input Validation
 
-Detail:
-Prevent malformed or incomplete requests using Joi schemas.
+Prevent invalid listing/review data
 
-Location:
+Implemented using Joi schemas
 
-schema.js
+Located in: schema.js
 
 🧰 Tech Stack
 
 Backend: Node.js, Express.js
-
 Frontend: EJS, EJS-Mate (layouts)
-
 Database: MongoDB, Mongoose
-
 Authentication: Passport.js
-
 Validation: Joi
-
 Utilities: connect-flash, method-override, express-session
 
 🚀 Getting Started
-Prerequisites
+🔧 Prerequisites
 
 Node.js (v14+ recommended)
 
 npm
 
-MongoDB (Local or Atlas)
+MongoDB (local or Atlas)
 
-1. Clone the Repository
+📥 1. Clone the Repository
 git clone https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git
 cd YOUR_REPO_NAME
 
-2. Install Packages
+📦 2. Install Packages
 npm install
 
-3. Create .env File
-
-Add the following:
-
+🔐 3. Create .env File
 SECRET=your_session_secret
 MONGO_URL=mongodb://127.0.0.1:27017/wanderlust
 
 
-(Replace this with your Atlas URI if using MongoDB Atlas.)
+(Use your Atlas URI if using MongoDB Atlas.)
 
-4. Start MongoDB (Local Only)
+🟢 4. Start MongoDB (Local Only)
 mongod
 
-5. Start the Application
+▶️ 5. Start the Application
 node app.js
 
 
-or:
+or
 
 npx nodemon app.js
 
-6. Visit the App
+🌍 6. Open in Browser
 http://localhost:8080
 
 📄 Key Routes Overview
-Listings
+📌 Listings Routes
 Method	Route	Description
 GET	/listings	All listings
 GET	/listings/new	New listing form
 POST	/listings	Create listing
 GET	/listings/:id	View listing
 GET	/listings/:id/edit	Edit listing
-PUT	/listings/:id	Update
-DELETE	/listings/:id	Delete
-Reviews
+PUT	/listings/:id	Update listing
+DELETE	/listings/:id	Delete listing
+✍️ Reviews Routes
 Method	Route	Description
 POST	/listings/:id/reviews	Add review
 DELETE	/listings/:id/reviews/:rid	Delete review
-User Authentication
+👤 User Authentication Routes
 Method	Route	Description
 GET	/register	Registration form
 POST	/register	Register user
 GET	/login	Login form
-POST	/login	Login
+POST	/login	Login user
 GET	/logout	Logout
 📂 Project Structure
 MAJORPROJECT/
@@ -196,48 +187,42 @@ MAJORPROJECT/
 
 🔧 Environment Variables
 Variable	Purpose
-SECRET	Session secret string
+SECRET	Session secret
 MONGO_URL	MongoDB connection string
-
-Optional (if using Cloudinary later):
-
+Optional (if using Cloudinary):
 Variable	Purpose
-CLOUDINARY_CLOUD_NAME	Cloudinary cloud name
+CLOUDINARY_CLOUD_NAME	Cloud name
 CLOUDINARY_KEY	API key
 CLOUDINARY_SECRET	API secret
 🛠 Common Commands
-
-Initialize Git:
-
+Initialize Git
 git init
 git add .
 git commit -m "Initial commit"
 
-
-Push to GitHub:
-
+Push to GitHub
 git branch -M main
 git remote add origin https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git
 git push -u origin main
 
 🧪 Troubleshooting
 
-MongoDB not connecting → Ensure mongod is running OR Atlas URI is correct
+MongoDB not connecting → ensure mongod is running or URI is correct
 
-Session issues → Confirm SECRET in .env is set
+Session issues → check .env SECRET
 
-Login not working → Ensure passport.initialize() and passport.session() are used
+Passport not working → verify passport.initialize() & passport.session()
 
-Validation errors → Check Joi rules in schema.js
+Validation errors → check Joi schemas in schema.js
 
 🚀 Future Improvements
 
-Cloudinary image uploads
+Add Cloudinary image uploads
 
-Mapbox / Google Maps integration
+Add Mapbox / Google Maps
 
-Pagination, filtering, search
+Add pagination and filtering
 
-Move to React frontend
+Convert frontend to React
 
-Deploy on Render/Netlify/Atlas
+Deploy to Render / Netlify / Railway
