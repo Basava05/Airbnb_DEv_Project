@@ -1,4 +1,4 @@
-#🏡 WanderLust – Airbnb Clone (Major Project)
+🏡 <h1>WanderLust – Airbnb Clone (Major Project)</h1>
 
 WanderLust is a full-stack Airbnb-style web application built using Node.js, Express, MongoDB, Mongoose, Passport.js, and EJS.
 It allows users to browse listings, create/manage listings, post reviews, authenticate securely, and manage their accounts.
@@ -194,16 +194,16 @@ Variable	Purpose
 CLOUDINARY_CLOUD_NAME	Cloud name
 CLOUDINARY_KEY	API key
 CLOUDINARY_SECRET	API secret
-🛠 Common Commands
-Initialize Git
-git init
-git add .
-git commit -m "Initial commit"
+🛠 Common Commands<br>
+Initialize Git<br>
+git init<br>
+git add .<br>
+git commit -m "Initial commit"<br>
 
-Push to GitHub
-git branch -M main
-git remote add origin https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git
-git push -u origin main
+Push to GitHub<br>
+git branch -M main<br>
+git remote add origin https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git <br>
+git push -u origin main<br>
 
 🧪 Troubleshooting
 
