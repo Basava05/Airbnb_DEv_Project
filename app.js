@@ -28,8 +28,8 @@ const LocalStrategy = require("passport-local");
 const User = require("./models/user.js");
 
 
-// let MONGO_URL = "mongodb://127.0.0.1:27017/wounderlust";
-let dbUrl = process.env.ATLASDB_URL;
+let MONGO_URL = "mongodb://127.0.0.1:27017/wounderlust";
+// let dbUrl = process.env.ATLASDB_URL;
 
 main()
   .then(() => {
@@ -40,7 +40,7 @@ main()
   });
 
 async function main() {
-  await mongoose.connect(dbUrl);
+  await mongoose.connect(MONGO_URL);
 }
 
 app.set("view engine", "ejs");
@@ -50,30 +50,40 @@ app.use(methodOverride("_method"));
 app.engine("ejs", ejsMate);
 app.use(express.static(path.join(__dirname, "/public")));
 
-const store = MongoStore.create({
-  mongoUrl:dbUrl,
-  crypto:{
-    secret:process.env.SECRET,
-  },
-  touchAfter:24*3600,
-});
+// const store = MongoStore.create({
+//   mongoUrl:MONGO_URL,
+//   crypto:{
+//     secret:process.env.SECRET,
+//   },
+//   touchAfter:24*3600,
+// });
 
-store.on("error",()=>{
-  console.log("Error is mongo session store",err);
-});
+// store.on("error",()=>{
+//   console.log("Error is mongo session store",err);
+// });
+
+// const sessionOptions = {
+//   store,
+//   secret:process.env.SECRET,
+//   resave:false,
+//   saveUninitialized:true,
+//   cookie:{
+//     expire:Date.now()+7*24*60*60*1000,
+//     maxAge:7*24*60*60*1000,
+//     httpOnly:true,
+//   },
+// };
 
 const sessionOptions = {
-  store,
-  secret:process.env.SECRET,
-  resave:false,
-  saveUninitialized:true,
-  cookie:{
-    expire:Date.now()+7*24*60*60*1000,
-    maxAge:7*24*60*60*1000,
-    httpOnly:true,
+  secret: process.env.SECRET || "khdfphqnnnbhteohqkldpwhgl",
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    expire: Date.now() + 7 * 24 * 60 * 60 * 1000,
+    maxAge: 7 * 24 * 60 * 60 * 1000,
+    httpOnly: true,
   },
-};
-
+}
 
 // app.get("/", (req, res) => {
 //   res.send("Working!");
