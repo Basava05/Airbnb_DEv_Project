@@ -1,4 +1,4 @@
-🏡 WanderLust – Airbnb Clone (Major Project)
+#🏡 WanderLust – Airbnb Clone (Major Project)
 
 WanderLust is a full-stack Airbnb-style web application built using Node.js, Express, MongoDB, Mongoose, Passport.js, and EJS.
 It allows users to browse listings, create/manage listings, post reviews, authenticate securely, and manage their accounts.
@@ -160,30 +160,30 @@ POST	/register	Register user
 GET	/login	Login form
 POST	/login	Login user
 GET	/logout	Logout
-📂 Project Structure
-MAJORPROJECT/
-├── models/
-├── public/
-│   ├── css/
-│   └── js/
-├── routes/
-│   ├── listing.js
-│   ├── review.js
-│   └── user.js
-├── utils/
-│   ├── ExpressError.js
-│   └── wrapAsync.js
-├── views/
-│   ├── layouts/
-│   ├── listings/
-│   ├── users/
-│   └── includes/
-├── schema.js
-├── app.js
-├── .env
-├── .gitignore
-├── package.json
-└── package-lock.json
+📂 Project Structure<br>
+MAJORPROJECT/<br>
+├── models/ <br>
+├── public/ <br>
+│   ├── css/ <br>
+│   └── js/ <br>
+├── routes/ <br>
+│   ├── listing.js <br>
+│   ├── review.js <br>
+│   └── user.js <br>
+├── utils/ <br>
+│   ├── ExpressError.js <br>
+│   └── wrapAsync.js <br>
+├── views/ <br> 
+│   ├── layouts/ <br>
+│   ├── listings/ <br>
+│   ├── users/ <br>
+│   └── includes/ <br>
+├── schema.js <br>
+├── app.js <br>
+├── .env <br>
+├── .gitignore <br>
+├── package.json <br>
+└── package-lock.json <br>
 
 🔧 Environment Variables
 Variable	Purpose
