@@ -1,4 +1,4 @@
-<h1>🏡WanderLust – Airbnb Clone (Major Project)</h1>
+<h1>🏡WanderLust – Airbnb Clone (Full Stack Web Project)</h1>
 
 WanderLust is a full-stack Airbnb-style web application built using Node.js, Express, MongoDB, Mongoose, Passport.js, and EJS.
 It allows users to browse listings, create/manage listings, post reviews, authenticate securely, and manage their accounts.
