@@ -1,26 +1,20 @@
+const path = require("path");
+
 if(process.env.NODE_ENV != "production"){
-  require('dotenv').config();
+  require("dotenv").config({ path: path.join(__dirname, "../.env") });
 }
 
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
-const Listing = require("./models/listing.js");
-const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
-const wrapAsync = require("./utils/wrapAsync.js");
 const ExpressError = require("./utils/ExpressError.js");
-const { error } = require("console");
-const e = require("express");
-const {listingSchema,reviewSchema} = require("./schema.js");
-const Review = require("./models/review.js");
 
 const listingsRouter = require("./routes/listing.js");
 const reviewsRouter = require("./routes/review.js");
 const userRouter = require("./routes/user.js");
 const session = require("express-session");
-const MongoStore = require('connect-mongo');
 
 const flash  = require("connect-flash");
 const passport = require("passport");
@@ -28,15 +22,19 @@ const LocalStrategy = require("passport-local");
 const User = require("./models/user.js");
 
 
-let MONGO_URL = "mongodb://127.0.0.1:27017/wounderlust";
-// let dbUrl = process.env.ATLASDB_URL;
+const PORT = process.env.PORT || 8080;
+const MONGO_URL = process.env.MONGO_URL || process.env.ATLASDB_URL || "mongodb://127.0.0.1:27017/wanderlust";
 
 main()
   .then(() => {
-    console.log("connect to db");
+    console.log("connected to db");
+    app.listen(PORT, () => {
+      console.log(`App is listening on port ${PORT}!`);
+    });
   })
-  .catch((e) => {
-    console.log(e);
+  .catch((err) => {
+    console.error("Database connection failed:", err.message);
+    process.exit(1);
   });
 
 async function main() {
@@ -44,11 +42,11 @@ async function main() {
 }
 
 app.set("view engine", "ejs");
-app.set("views", path.join(__dirname, "views"));
+app.set("views", path.join(__dirname, "../frontend/views"));
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 app.engine("ejs", ejsMate);
-app.use(express.static(path.join(__dirname, "/public")));
+app.use(express.static(path.join(__dirname, "../frontend/public")));
 
 // const store = MongoStore.create({
 //   mongoUrl:MONGO_URL,
@@ -119,9 +117,6 @@ app.use("/{*catchAll}",(req,res,next)=>{
 app.use((err, req, res, next) => {
   let{statusCode = 500,message = "Page Not Found!"} = err;
 //   res.status(statusCode).send(message);
-    res.render("error.ejs",{message});
+    res.status(statusCode).render("error.ejs",{message});
 });
 
-app.listen(8080, () => {
-  console.log("App is listening!");
-});

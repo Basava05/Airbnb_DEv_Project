@@ -1,3 +1,6 @@
 .env
 node_modules/
 **/.DB_Store
+**/.DS_Store
+backend/.app-run*.log
+backend/.mongo-local/

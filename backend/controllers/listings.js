@@ -1,9 +1,26 @@
 const Listing = require("../models/listing");
 const { listingSchema } = require("../schema.js");
 
+const escapeRegex = (value) => value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
 module.exports.index = async (req, res) => {
-  const allListings = await Listing.find({});
-  res.render("listings/index.ejs", { allListings });
+  const searchQuery = req.query.search ? req.query.search.trim() : "";
+  let filter = {};
+
+  if (searchQuery) {
+    const regex = new RegExp(escapeRegex(searchQuery), "i");
+    filter = {
+      $or: [
+        { title: regex },
+        { location: regex },
+        { country: regex },
+        { description: regex },
+      ],
+    };
+  }
+
+  const allListings = await Listing.find(filter);
+  res.render("listings/index.ejs", { allListings, searchQuery });
 };
 
 module.exports.renderNewForm = (req, res) => {
@@ -24,7 +41,6 @@ module.exports.showListing = async (req, res) => {
     req.flash("error", "The listing you looking for is no longer available");
     return res.redirect("/listings");
   }
-  console.log(listing);
   res.render("listings/show.ejs", { listing });
 };
 
@@ -34,8 +50,12 @@ module.exports.createListing = async (req, res, next) => {
   // if (result.error) {
   //   throw new ExpressError(400, result.error);
   // }
-  let url = req.file.path;
-  let filename = req.file.filename;
+  if (!req.file) {
+    req.flash("error", "Please upload a listing image.");
+    return res.redirect("/listings/new");
+  }
+  const url = req.file.path;
+  const filename = req.file.filename;
   const newListing = new Listing(req.body.listing);
   newListing.owner = req.user._id;
   newListing.image = { url, filename };

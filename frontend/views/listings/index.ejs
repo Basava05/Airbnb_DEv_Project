@@ -107,6 +107,13 @@
 
     </div>
     <div class="row row-cols-lg-3 row-cols-md-3 row-cols-sm-1 mt-3">
+        <% if(allListings.length === 0) { %>
+            <div class="col-12 text-center mt-5">
+                <h4>No listings found</h4>
+                <p class="text-muted">Try searching by title, location, country, or description.</p>
+                <a href="/listings" class="btn btn-dark">Show all listings</a>
+            </div>
+        <% } %>
         <%for(let listing of allListings ){%>
             <a href="/listings/<%= listing._id %>" class="listing-link">
                 <div class="card col listing-card">

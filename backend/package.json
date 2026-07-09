@@ -3,8 +3,8 @@
     "node":"22.18.0"
   },
   "scripts": {
-    "start": "node backend/app.js",
-    "dev": "node --watch backend/app.js"
+    "start": "node app.js",
+    "dev": "node --watch app.js"
   },
   "dependencies": {
     "cloudinary": "^1.37.2",
